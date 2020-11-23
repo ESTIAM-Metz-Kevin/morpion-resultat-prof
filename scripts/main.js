@@ -20,4 +20,5 @@ window.onload = () => { // fonction fléchée anonyme = fonction anonyme mais en
     const launchButton = document.getElementById("launchGameButton")
     launchButton.addEventListener("click", game.start.bind(game))
     launchButton.addEventListener("click", board.clear.bind(board))
+    launchButton.addEventListener("click", detail.clear.bind(detail))
 }

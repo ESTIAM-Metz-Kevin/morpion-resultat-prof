@@ -5,6 +5,10 @@ class GameDetail {
         this.playerVictory = this.detail.querySelector("#player_victory_name")
     }
 
+    clear() {
+        this.playerVictory.innerHTML = ""
+    }
+
     updatePlayerTurn(player) {
         this.playerTurn.innerHTML = player.name
     }
