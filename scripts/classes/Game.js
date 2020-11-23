@@ -30,23 +30,28 @@ class Game {
         console.log("[Game.start] Turn of:", this.playerTurn)
     }
 
+    canPlay() {
+        return this.isStarted && !this.isFinished
+    }
+
     switchPlayerTurn() {
         this.playerTurn = this.playerTurn == this.player1 ? this.player2 : this.player1
         console.log("[Game.switchPlayerTurn] Turn of:", this.playerTurn)
     }
 
     playerAction(cell) { // Instance de la classe Cell
-        if (!this.isStarted || !cell.is_empty) return
+        if (!this.canPlay() || !cell.is_empty) return
 
         this.onPlayerAction(cell)
 
-        console.log("[Game.playerAction] Update matrix")
         const matrix_value = this.mapMatrixValueFromScore(this.playerTurn.score)
-
+        
         this.morpion.matrix[cell.x][cell.y] = matrix_value
+        console.log("[Game.playerAction] Update matrix", matrix_value, this.morpion.matrix)
         
         if (this.morpion.isResolved(matrix_value)) {
             console.log("[Game.playerAction] Player has win ✨🎉🎊", this.playerTurn)
+            this.isFinished = true
             this.onPlayerWin(this.playerTurn)
             return
         }

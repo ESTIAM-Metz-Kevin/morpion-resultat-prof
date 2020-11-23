@@ -6,9 +6,14 @@ window.onload = () => { // fonction fléchée anonyme = fonction anonyme mais en
     )
 
     const board = new GameBoard("#board")
+    const detail = new GameDetail("#game_details")
 
-    game.onPlayerTurn = player => board.score = player.score
+    game.onPlayerTurn = player => {
+        board.score = player.score
+        detail.updatePlayerTurn(player)
+    }
     game.onPlayerAction = board.addScore.bind(board)
+    game.onPlayerWin = detail.updatePlayerVictory.bind(detail)
     board.onCellChoosed = game.playerAction.bind(game)
 
     // Lancement d'une partie
